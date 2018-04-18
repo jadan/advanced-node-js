@@ -29,6 +29,11 @@ class Page {
     await this.page.goto('localhost:3000');
     await this.page.waitFor('a[href="/auth/logout"]');
   }
+
+  async getContentsOf(selector) {
+    const text = await this.page.$eval(selector, el => el.innerHTML);
+    return text;
+  }
 }
 
 module.exports = Page;
