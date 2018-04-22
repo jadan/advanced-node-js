@@ -65,7 +65,14 @@ describe('When logged in', async () => {
 
 describe('Not logged in', async () => {
   test('and submit a blog post', async () => {
-
+    fetch('localhost:5000/api/blogs', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type:': 'application/json'
+      },
+      body: JSON.stringify({ title: 'My title', content: 'My content' })
+    });
   });
 });
 
