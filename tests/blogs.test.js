@@ -64,15 +64,25 @@ describe('When logged in', async () => {
 });
 
 describe('Not logged in', async () => {
-  test('and submit a blog post', async () => {
-    fetch('localhost:5000/api/blogs', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type:': 'application/json'
-      },
-      body: JSON.stringify({ title: 'My title', content: 'My content' })
-    });
+  const actions = [
+    {
+      method: 'get',
+      path: '/api/blogs'
+    },
+    {
+      method: 'post',
+      path: '/api/blogs',
+      data: {
+        title: 'My title',
+        content: 'My content'
+      }
+    }
+  ];
+  test.only('blog related actions are prohibited', async () => {
+    const results = await page.execRequests(actions);
+    for (const result of results) {
+      expect(result).toEqual({ error: 'You must log in!' });
+    }
   });
 });
 
