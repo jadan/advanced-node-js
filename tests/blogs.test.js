@@ -80,6 +80,7 @@ describe('Not logged in', async () => {
   ];
   test.only('blog related actions are prohibited', async () => {
     const results = await page.execRequests(actions);
+    /* eslint-disable no-restricted-syntax */
     for (const result of results) {
       expect(result).toEqual({ error: 'You must log in!' });
     }
