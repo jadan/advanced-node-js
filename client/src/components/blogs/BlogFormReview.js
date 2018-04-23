@@ -7,19 +7,23 @@ import formFields from './formFields';
 import * as actions from '../../actions';
 
 class BlogFormReview extends Component {
-  state = { file: null }
+  constructor(props) {
+    super(props);
+    this.state = {
+       file: null
+    };
+  }
 
   onSubmit(event) {
     event.preventDefault();
 
     const { submitBlog, history, formValues } = this.props;
 
-    submitBlog(formValues, history);
+    submitBlog(formValues, history, this.state.file);
   }
 
   onFileChange(event) {
     this.setState({ file: event.target.files[0] });
-    console.log(event.target.files[0]);
   }
 
   renderFields() {
